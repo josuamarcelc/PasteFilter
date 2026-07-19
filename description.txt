@@ -1,0 +1,38 @@
+PasteFilter — Redact & Randomize Sensitive Data
+
+Stop pasting secrets by accident. PasteFilter watches what you paste into web
+pages — AI chat boxes, forms, support tickets, dashboards — and catches API
+keys, passwords, and personal data before they land. Block it, mask it, or swap
+in realistic-but-useless fake data. Everything runs on your device. No accounts,
+no tracking, nothing ever leaves your browser.
+
+── Four ways to react ──
+• Off — stays out of the way.
+• Warn — a dialog shows what was found and lets you choose what to paste.
+• Mask — replaces each secret with a [[PLACEHOLDER]] automatically.
+• Randomize — swaps each secret for realistic fake data, so the text still
+  looks and parses like the real thing but every value is fictional.
+
+── What it detects ──
+• Secrets: private keys, JWTs, Bearer tokens, AWS / GitHub / Google / Slack /
+  SendGrid / Stripe keys, database connection strings, and .env credentials.
+• Personal data: emails, phone numbers, credit cards, IBANs, IP addresses,
+  and EU VAT numbers.
+Structured values are checksum-validated (Luhn for cards, mod-97 for IBANs),
+so everyday text like order numbers or version strings is left alone.
+
+── Private by design ──
+• No network requests — detection and replacement happen locally.
+• No analytics, no telemetry, no cookies, no fingerprinting.
+• No sign-in. Settings and a local counter stay on your device only.
+
+── Handy touches ──
+• Toolbar popup with a live "try it" preview and one-click pause per site.
+• Right-click any field or selection to clean it on demand.
+• Per-detector toggles, site allowlist, and custom allowlist patterns.
+• Light and dark theme that follows your system.
+
+PasteFilter's detection engine is adapted from the open-source PasteGuard
+project (Apache-2.0), rebuilt to run entirely in your browser.
+
+Built by SEOULTRA — https://seoultra.id/plugins/

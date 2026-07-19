@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PasteFilter — Settings</title>
+  <link rel="stylesheet" href="theme.css">
+  <style>
+    .pf-page { max-width: 760px; margin: 0 auto; padding: 28px 20px 60px; display: flex; flex-direction: column; gap: 18px; }
+    header.pf-hd { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .pf-section h2 { font-size: 15px; margin: 0 0 4px; }
+    .pf-section p.pf-desc { margin: 0 0 12px; font-size: 13px; color: var(--pf-muted); }
+    .pf-grid2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; }
+    .pf-toggle-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 10px;
+      border: 1px solid var(--pf-border); border-radius: 8px; background: var(--pf-bg); font-size: 13px; }
+    .pf-welcome { border-left: 4px solid var(--pf-accent); }
+    select, input[type="text"], textarea {
+      font-family: inherit; font-size: 13px; color: var(--pf-text); background: var(--pf-bg);
+      border: 1px solid var(--pf-border); border-radius: 8px; padding: 8px 10px;
+    }
+    textarea { width: 100%; min-height: 76px; resize: vertical; font-family: ui-monospace, Menlo, monospace; }
+    .pf-inline { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .pf-list { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+    .pf-list .pf-item { display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      border: 1px solid var(--pf-border); border-radius: 8px; padding: 6px 10px; font-size: 13px; }
+    .pf-save-note { font-size: 12px; color: var(--pf-ok); min-height: 16px; }
+    label.pf-tt { display: flex; align-items: center; gap: 8px; }
+  </style>
+</head>
+<body>
+  <div class="pf-page">
+    <header class="pf-hd">
+      <div class="pf-brand">
+        <img src="../assets/icon-48.png" alt="">
+        <div class="pf-name" style="font-size:20px">Paste<span>Filter</span></div>
+      </div>
+      <span class="pf-save-note" id="pf-note"></span>
+    </header>
+
+    <div class="pf-card pf-welcome" id="pf-welcome" hidden>
+      <b>Welcome to PasteFilter.</b>
+      <p class="pf-desc" style="margin:6px 0 0">PasteFilter watches what you paste into web forms and chat boxes. When it
+      spots an API key, password, or personal detail, it can warn you, mask it, or swap in realistic fake data — all on
+      your device. Nothing is ever sent anywhere.</p>
+    </div>
+
+    <section class="pf-section pf-card">
+      <h2>Behavior</h2>
+      <p class="pf-desc">How PasteFilter reacts when it detects sensitive data in a paste.</p>
+      <div class="pf-grid2">
+        <div class="pf-toggle-row"><span>Default action</span>
+          <select id="pf-mode">
+            <option value="off">Off</option>
+            <option value="warn">Warn me</option>
+            <option value="mask">Mask</option>
+            <option value="randomize">Randomize</option>
+          </select>
+        </div>
+        <div class="pf-toggle-row"><span>Clean action (Warn / right-click)</span>
+          <select id="pf-clean">
+            <option value="mask">Mask</option>
+            <option value="randomize">Randomize</option>
+          </select>
+        </div>
+        <div class="pf-toggle-row"><span>Theme</span>
+          <select id="pf-theme">
+            <option value="auto">Auto (system)</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </div>
+        <div class="pf-toggle-row"><span>Show toast after cleaning</span>
+          <label class="pf-switch"><input type="checkbox" id="pf-toast"><span class="pf-slider"></span></label>
+        </div>
+      </div>
+    </section>
+
+    <section class="pf-section pf-card">
+      <h2>Secrets to detect</h2>
+      <p class="pf-desc">Credentials and keys. All on by default.</p>
+      <div class="pf-grid2" id="pf-secrets"></div>
+    </section>
+
+    <section class="pf-section pf-card">
+      <h2>Personal data to detect</h2>
+      <p class="pf-desc">PII validated locally (Luhn for cards, mod-97 for IBAN, range checks for IPs).</p>
+      <div class="pf-grid2" id="pf-pii"></div>
+    </section>
+
+    <section class="pf-section pf-card">
+      <h2>Paused sites</h2>
+      <p class="pf-desc">PasteFilter does nothing on these hostnames.</p>
+      <div class="pf-inline">
+        <input type="text" id="pf-site-input" placeholder="example.com" style="flex:1;min-width:180px">
+        <button class="pf-btn pf-btn-primary" id="pf-site-add">Add</button>
+      </div>
+      <div class="pf-list" id="pf-site-list"></div>
+    </section>
+
+    <section class="pf-section pf-card">
+      <h2>Allowlist patterns</h2>
+      <p class="pf-desc">One regular expression per line. Text matching any pattern is never flagged
+      (e.g. <code>@mycompany\.com$</code> or <code>TEST-\d+</code>).</p>
+      <textarea id="pf-allow" placeholder="@mycompany\.com&#10;TEST-\d+"></textarea>
+    </section>
+
+    <section class="pf-section pf-card">
+      <div class="pf-row">
+        <div><b>Statistics</b><div class="pf-desc" id="pf-stat-line" style="margin:4px 0 0">—</div></div>
+        <button class="pf-btn pf-btn-danger" id="pf-reset">Reset stats</button>
+      </div>
+    </section>
+
+    <footer class="pf-desc" style="text-align:center">
+      PasteFilter by <a href="https://seoultra.id/plugins/" target="_blank" rel="noopener">SEOULTRA</a> ·
+      Detection engine adapted from PasteGuard (Apache-2.0) · 100% local, no data leaves your device.
+    </footer>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="detectors.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

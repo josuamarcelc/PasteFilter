@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="theme.css">
+  <style>
+    body { width: 328px; }
+    .pf-wrap { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+    header.pf-top { display: flex; align-items: center; justify-content: space-between; }
+    .pf-label { font-size: 12px; font-weight: 600; color: var(--pf-muted); text-transform: uppercase; letter-spacing: .04em; margin: 0 0 8px; }
+    .pf-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .pf-stat { background: var(--pf-bg); border: 1px solid var(--pf-border); border-radius: 8px; padding: 8px 10px; }
+    .pf-stat b { font-size: 18px; display: block; }
+    .pf-stat span { font-size: 11px; color: var(--pf-muted); }
+    .pf-types { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+    textarea.pf-try { width: 100%; min-height: 54px; resize: vertical; border-radius: 8px; border: 1px solid var(--pf-border);
+      background: var(--pf-bg); color: var(--pf-text); padding: 8px; font-size: 12px; font-family: ui-monospace, Menlo, monospace; }
+    .pf-preview { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; color: var(--pf-muted); margin-top: 8px;
+      white-space: pre-wrap; word-break: break-word; max-height: 90px; overflow: auto; }
+    .pf-foot { display: flex; align-items: center; justify-content: space-between; font-size: 12px; }
+    .pf-foot a { text-decoration: none; font-weight: 600; }
+    .pf-hint { font-size: 11px; color: var(--pf-muted); }
+  </style>
+</head>
+<body>
+  <div class="pf-wrap">
+    <header class="pf-top">
+      <div class="pf-brand">
+        <img src="../assets/icon-48.png" alt="">
+        <div class="pf-name">Paste<span>Filter</span></div>
+      </div>
+      <label class="pf-switch" title="Enable PasteFilter">
+        <input type="checkbox" id="pf-enabled"><span class="pf-slider"></span>
+      </label>
+    </header>
+
+    <div class="pf-card">
+      <p class="pf-label">Action on sensitive paste</p>
+      <div class="pf-seg" id="pf-mode">
+        <button data-mode="off">Off</button>
+        <button data-mode="warn">Warn</button>
+        <button data-mode="mask">Mask</button>
+        <button data-mode="randomize">Randomize</button>
+      </div>
+      <p class="pf-hint" id="pf-mode-hint" style="margin:8px 0 0"></p>
+    </div>
+
+    <div class="pf-card">
+      <div class="pf-row">
+        <div>
+          <div style="font-weight:600;font-size:13px">Pause on this site</div>
+          <div class="pf-hint" id="pf-host">—</div>
+        </div>
+        <label class="pf-switch" title="Pause here">
+          <input type="checkbox" id="pf-paused"><span class="pf-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="pf-card">
+      <p class="pf-label">Protected so far</p>
+      <div class="pf-stat-grid">
+        <div class="pf-stat"><b id="pf-total">0</b><span>items filtered</span></div>
+        <div class="pf-stat"><b id="pf-secrets">0</b><span>secrets caught</span></div>
+      </div>
+      <div class="pf-types" id="pf-toptypes"></div>
+    </div>
+
+    <div class="pf-card">
+      <p class="pf-label">Try it</p>
+      <textarea class="pf-try" id="pf-try" placeholder="Paste a sample here — e.g. contact me at jane@acme.com, key sk-abcd1234abcd1234abcd1234"></textarea>
+      <div class="pf-types" id="pf-try-chips"></div>
+      <div class="pf-preview" id="pf-try-out"></div>
+    </div>
+
+    <div class="pf-foot">
+      <span class="pf-hint">100% local · no tracking</span>
+      <a href="#" id="pf-options">Settings</a>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="detectors.js"></script>
+  <script src="fake.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

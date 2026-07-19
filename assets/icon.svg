@@ -1,0 +1,17 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- PasteFilter icon — shield (privacy heritage) + funnel/filter (the "filter") + scrambled dots (randomize). SEOULTRA blue. -->
+  <defs>
+    <linearGradient id="pf-grad" x1="24" y1="10" x2="104" y2="118" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1a73e8"/>
+      <stop offset="1" stop-color="#0b57d0"/>
+    </linearGradient>
+  </defs>
+  <!-- Shield body -->
+  <path d="M64 10 L106 24 V60 c0 30-19 50-42 58 -23-8-42-28-42-58 V24 Z" fill="url(#pf-grad)"/>
+  <!-- Funnel / filter -->
+  <path d="M44 44 H84 L69 64 V86 L59 80 V64 Z" fill="#ffffff"/>
+  <!-- Scrambled output dots (data turned into useless noise) -->
+  <circle cx="52" cy="98" r="3.4" fill="#ffffff" opacity="0.95"/>
+  <circle cx="64" cy="101" r="3.4" fill="#ffffff" opacity="0.7"/>
+  <circle cx="76" cy="98" r="3.4" fill="#ffffff" opacity="0.45"/>
+</svg>

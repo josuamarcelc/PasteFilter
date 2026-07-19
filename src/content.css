@@ -1,0 +1,61 @@
+/* PasteFilter — in-page UI (toast + confirm overlay). Namespaced to avoid host clashes. */
+.pf-toast-wrap {
+  position: fixed; z-index: 2147483646; right: 16px; bottom: 16px;
+  display: flex; flex-direction: column; gap: 8px; max-width: 360px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+.pf-toast {
+  background: #ffffff; color: #202124; border: 1px solid #dadce0; border-left: 4px solid #1a73e8;
+  border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,.22); padding: 11px 13px;
+  font-size: 13px; line-height: 1.45; animation: pf-in .18s ease;
+}
+.pf-toast b { font-weight: 600; }
+.pf-toast .pf-toast-sub { color: #5f6368; font-size: 12px; margin-top: 3px; }
+@keyframes pf-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.pf-overlay {
+  position: fixed; inset: 0; z-index: 2147483647; background: rgba(15,20,28,.55);
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+.pf-dialog {
+  background: #ffffff; color: #202124; width: 440px; max-width: 100%; border-radius: 14px;
+  box-shadow: 0 18px 50px rgba(0,0,0,.4); padding: 20px; border: 1px solid #dadce0;
+}
+.pf-dialog h2 { margin: 0 0 6px; font-size: 17px; font-weight: 600; }
+.pf-dialog .pf-lead { margin: 0 0 12px; color: #5f6368; font-size: 13px; line-height: 1.5; }
+.pf-findings { margin: 0 0 14px; max-height: 200px; overflow: auto; display: flex; flex-direction: column; gap: 6px; }
+.pf-finding {
+  display: flex; align-items: center; gap: 8px; font-size: 12.5px;
+  background: #f8f9fa; border: 1px solid #e3e6ea; border-radius: 8px; padding: 7px 9px;
+}
+.pf-finding .pf-tag {
+  font-weight: 700; font-size: 10.5px; letter-spacing: .02em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 999px; white-space: nowrap;
+}
+.pf-finding .pf-tag.secret { background: rgba(217,48,37,.12); color: #c5221f; }
+.pf-finding .pf-tag.pii { background: rgba(26,115,232,.12); color: #1a73e8; }
+.pf-finding code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: #3c4043; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pf-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.pf-actions button {
+  appearance: none; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+  border-radius: 8px; padding: 9px 14px; border: 1px solid #dadce0; background: #f1f3f4; color: #202124;
+}
+.pf-actions .pf-primary { background: #1a73e8; color: #fff; border-color: #1a73e8; }
+.pf-actions .pf-primary:hover { background: #0b57d0; }
+.pf-actions .pf-ghost:hover { border-color: #1a73e8; }
+.pf-actions .pf-warnbtn { color: #c5221f; }
+
+@media (prefers-color-scheme: dark) {
+  .pf-toast { background: #171b21; color: #e8eaed; border-color: #2a2f37; border-left-color: #8ab4f8; box-shadow: 0 4px 16px rgba(0,0,0,.6); }
+  .pf-toast .pf-toast-sub { color: #9aa0a6; }
+  .pf-dialog { background: #171b21; color: #e8eaed; border-color: #2a2f37; }
+  .pf-dialog .pf-lead { color: #9aa0a6; }
+  .pf-finding { background: #1f242c; border-color: #2a2f37; }
+  .pf-finding code { color: #c8ccd1; }
+  .pf-finding .pf-tag.secret { background: rgba(242,139,130,.16); color: #f28b82; }
+  .pf-finding .pf-tag.pii { background: rgba(138,180,248,.16); color: #8ab4f8; }
+  .pf-actions button { background: #1f242c; color: #e8eaed; border-color: #2a2f37; }
+  .pf-actions .pf-primary { background: #4c8dff; color: #0b1220; border-color: #4c8dff; }
+  .pf-actions .pf-primary:hover { background: #6ba0ff; }
+}

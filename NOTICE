@@ -1,0 +1,15 @@
+PasteFilter
+Copyright 2026 SEOULTRA and PasteFilter contributors
+
+This product includes detection logic derived from PasteGuard
+(https://github.com/sgasser/pasteguard), Copyright 2026 Stefan Gasser,
+licensed under the Apache License, Version 2.0.
+
+Specifically, the deterministic entity detectors (email, IPv4/IPv6, IBAN,
+credit card, VAT, phone) and the secrets ruleset in src/detectors.js are a
+JavaScript port of PasteGuard's Python detector and secrets configuration.
+The PasteGuard proxy/server code is NOT included; PasteFilter is an independent
+browser extension that runs entirely on-device.
+
+The name "PasteGuard" is used only for attribution. PasteFilter is not
+affiliated with or endorsed by the PasteGuard project.

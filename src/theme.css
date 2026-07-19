@@ -1,0 +1,114 @@
+/* PasteFilter — shared theme for popup + options (SEOULTRA light/dark) */
+:root {
+  --pf-bg: #ffffff;
+  --pf-surface: #f8f9fa;
+  --pf-surface-2: #eef1f4;
+  --pf-text: #202124;
+  --pf-muted: #5f6368;
+  --pf-border: #dadce0;
+  --pf-accent: #1a73e8;
+  --pf-accent-strong: #0b57d0;
+  --pf-on-accent: #ffffff;
+  --pf-danger: #d93025;
+  --pf-warn: #b06000;
+  --pf-ok: #188038;
+  --pf-shadow: 0 1px 2px rgba(60,64,67,.3), 0 2px 6px rgba(60,64,67,.15);
+  --pf-radius: 12px;
+  --pf-radius-sm: 8px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pf-bg: #0e1116;
+    --pf-surface: #171b21;
+    --pf-surface-2: #1f242c;
+    --pf-text: #e8eaed;
+    --pf-muted: #9aa0a6;
+    --pf-border: #2a2f37;
+    --pf-accent: #8ab4f8;
+    --pf-accent-strong: #4c8dff;
+    --pf-on-accent: #0b1220;
+    --pf-danger: #f28b82;
+    --pf-warn: #fdd663;
+    --pf-ok: #81c995;
+    --pf-shadow: 0 1px 2px rgba(0,0,0,.5), 0 2px 8px rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="light"] {
+  --pf-bg:#ffffff; --pf-surface:#f8f9fa; --pf-surface-2:#eef1f4; --pf-text:#202124;
+  --pf-muted:#5f6368; --pf-border:#dadce0; --pf-accent:#1a73e8; --pf-accent-strong:#0b57d0;
+  --pf-on-accent:#ffffff; --pf-danger:#d93025; --pf-warn:#b06000; --pf-ok:#188038;
+  --pf-shadow:0 1px 2px rgba(60,64,67,.3),0 2px 6px rgba(60,64,67,.15);
+}
+:root[data-theme="dark"] {
+  --pf-bg:#0e1116; --pf-surface:#171b21; --pf-surface-2:#1f242c; --pf-text:#e8eaed;
+  --pf-muted:#9aa0a6; --pf-border:#2a2f37; --pf-accent:#8ab4f8; --pf-accent-strong:#4c8dff;
+  --pf-on-accent:#0b1220; --pf-danger:#f28b82; --pf-warn:#fdd663; --pf-ok:#81c995;
+  --pf-shadow:0 1px 2px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.45);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Google Sans", Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background: var(--pf-bg);
+  color: var(--pf-text);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--pf-accent); }
+h1, h2, h3 { font-weight: 600; }
+
+.pf-brand { display: flex; align-items: center; gap: 10px; }
+.pf-brand img { width: 26px; height: 26px; display: block; }
+.pf-brand .pf-name { font-size: 16px; font-weight: 600; letter-spacing: .01em; }
+.pf-brand .pf-name span { color: var(--pf-accent); }
+
+.pf-card {
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
+  border-radius: var(--pf-radius);
+  padding: 14px;
+}
+.pf-muted { color: var(--pf-muted); }
+.pf-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+
+.pf-btn {
+  appearance: none; border: 1px solid var(--pf-border); background: var(--pf-surface-2);
+  color: var(--pf-text); border-radius: var(--pf-radius-sm); padding: 8px 14px;
+  font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit;
+}
+.pf-btn:hover { border-color: var(--pf-accent); }
+.pf-btn-primary { background: var(--pf-accent); color: var(--pf-on-accent); border-color: var(--pf-accent); }
+.pf-btn-primary:hover { background: var(--pf-accent-strong); border-color: var(--pf-accent-strong); }
+.pf-btn-danger { color: var(--pf-danger); }
+
+/* Toggle switch */
+.pf-switch { position: relative; display: inline-block; width: 40px; height: 22px; flex: 0 0 auto; }
+.pf-switch input { opacity: 0; width: 0; height: 0; }
+.pf-slider {
+  position: absolute; inset: 0; cursor: pointer; background: var(--pf-border);
+  border-radius: 22px; transition: .18s;
+}
+.pf-slider::before {
+  content: ""; position: absolute; height: 16px; width: 16px; left: 3px; top: 3px;
+  background: #fff; border-radius: 50%; transition: .18s;
+}
+.pf-switch input:checked + .pf-slider { background: var(--pf-accent); }
+.pf-switch input:checked + .pf-slider::before { transform: translateX(18px); }
+
+/* Segmented mode selector */
+.pf-seg { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.pf-seg button {
+  appearance: none; border: 1px solid var(--pf-border); background: var(--pf-bg);
+  color: var(--pf-text); border-radius: var(--pf-radius-sm); padding: 9px 4px; cursor: pointer;
+  font-size: 12px; font-weight: 600; font-family: inherit; text-align: center;
+}
+.pf-seg button[aria-pressed="true"] {
+  background: var(--pf-accent); color: var(--pf-on-accent); border-color: var(--pf-accent);
+}
+
+.pf-chip {
+  display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 999px;
+  font-size: 11px; font-weight: 600; border: 1px solid var(--pf-border); background: var(--pf-bg);
+}
+.pf-chip.secret { color: var(--pf-danger); }
+.pf-chip.pii { color: var(--pf-accent); }
